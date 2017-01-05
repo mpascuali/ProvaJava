@@ -23,13 +23,19 @@
 			
 			<p:growl id="messages" showDetail="true" autoUpdate="true" />
 			
-			<h:form rendered="#{usuarioLogado != null}">	
-				<p:menuButton value="Menu">
-					<p:menuitem value="Livros" action="livro?faces-redirect=true" icon="fa fa-fw fa-edit" />
-					<p:menuitem value="Autores" action="autor?faces-redirect=true" icon="fa fa-fw fa-edit" />
-					<p:separator />
-					<p:menuitem value="Logout" action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out" />
-				</p:menuButton>
+			<h:form rendered="#{usuarioLogado != null}">
+				<p:tabMenu activeIndex="#{param.i}">
+					<p:menuitem value="Livros" outcome="livro" icon="fa fa-fw fa-edit">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="Autores" outcome="autor" icon="fa fa-fw fa-edit">
+						<f:param name="i" value="1" />
+					</p:menuitem>
+					<p:menuitem value="Usuários" outcome="usuario" icon="fa fa-fw fa-edit">
+						<f:param name="i" value="2" />
+					</p:menuitem>
+					<p:menuitem value="Logout" action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out"/>
+				</p:tabMenu>
 			</h:form>
 			
 			<h1>

@@ -9,7 +9,6 @@ public class LivroDao {
 
 	public static ArrayList<Livro> LSLivro = new ArrayList<Livro>();
 	
-	
 	public void pesist(Livro livro){
 		LSLivro.add(livro);
 	}

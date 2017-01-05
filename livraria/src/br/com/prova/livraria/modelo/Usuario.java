@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import br.com.prova.livraria.enums.PerfilUsuario;
+
 @Entity
 public class Usuario implements Serializable {
 
@@ -16,6 +18,7 @@ public class Usuario implements Serializable {
 	private Integer id;
 	private String email;
 	private String senha;
+	private PerfilUsuario perfil;
 	
 	public String getEmail() {
 		return email;
@@ -40,7 +43,12 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
 
+	public PerfilUsuario getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilUsuario perfil) {
+		this.perfil = perfil;
+	}
 }

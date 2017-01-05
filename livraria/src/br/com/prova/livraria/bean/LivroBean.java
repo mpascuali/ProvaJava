@@ -24,6 +24,8 @@ public class LivroBean implements Serializable {
 	private Livro livro = new Livro();
 
 	private Integer autorId;
+	
+	private boolean mostraAutor = false;
 
 	private List<Livro> livros;
 	private LivroDao daoL = new LivroDao();
@@ -39,6 +41,15 @@ public class LivroBean implements Serializable {
 
 	public Livro getLivro() {
 		return livro;
+	}
+	
+
+	public boolean isMostraAutor() {
+		return mostraAutor;
+	}
+
+	public void setMostraAutor(boolean mostraAutor) {
+		this.mostraAutor = mostraAutor;
 	}
 
 	public List<Livro> getLivros() {
@@ -59,12 +70,28 @@ public class LivroBean implements Serializable {
 	}
 
 	public void carregarLivroPelaId() {
-		this.livro = daoL.buscaPorId(this.livro.getId()); 
+		this.livro = daoL.buscaPorId(this.livro.getId());
+	}
+	
+	public void mostraAutorChangeListener(){
+		System.out.println("MOSTRA");
+		this.mostraAutor = true;
 	}
 	
 	public void gravarAutor() {
 		Autor autor = daoA.buscaPorId(this.autorId);
-		this.livro.adicionaAutor(autor);
+		boolean adicionaAutor = true;
+		
+		for (Autor autorLista : livro.getAutores()) {
+			if(autorLista.getId() == autorId){
+				adicionaAutor = false;
+			}
+		}
+		
+		if(adicionaAutor){
+			this.livro.adicionaAutor(autor);
+		}
+		
 		System.out.println("Escrito por: " + autor.getNome());
 	}
 
@@ -101,6 +128,7 @@ public class LivroBean implements Serializable {
 	public void carregar(Livro livro) {
 		System.out.println("Carregando livro");
 		this.livro = livro;
+		this.mostraAutor = true;
 	}
 	
 	public String formAutor() {

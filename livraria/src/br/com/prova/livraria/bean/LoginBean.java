@@ -41,8 +41,6 @@ public class LoginBean {
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		context.addMessage(null, new FacesMessage("Usuário não encontrado"));
 		
-		pb.dropLista();
-		
 		return "login?faces-redirect=true";
 	}
 	

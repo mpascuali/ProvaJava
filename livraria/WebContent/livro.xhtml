@@ -20,7 +20,7 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<h:form>
+		<h:form id="formAddLivro">
 
 			<p:messages id="messages" />
 
@@ -32,7 +32,7 @@
 						required="true" requiredMessage="Título obrigatório"
 						validatorMessage="Título não pode ser superior a 40">
 						<f:validateLength maximum="40" />
-						<f:ajax event="blur" render="messages" />
+						<f:ajax event="change" render="messages, formAddLivro" listener="#{livroBean.mostraAutorChangeListener}"/>
 					</p:inputText>
 
 					<p:outputLabel value="ISBN:" for="isbn" />
@@ -52,7 +52,7 @@
 
 			</p:fieldset>
 
-			<p:fieldset legend="Dados do Autor">
+			<p:fieldset id="dadosAutor" legend="Dados do Autor" rendered="#{livroBean.mostraAutor}">
 
 				<p:panelGrid columns="4">
 					<p:outputLabel value="Selecione Autor:" for="autor" />
@@ -93,7 +93,7 @@
 
 		<h:form id="formTabelaLivros">
 			<p:dataTable value="#{livroBean.livros}" var="livro"
-				id="tabelaLivros" paginator="true" rows="5">
+				id="tabelaLivros" paginator="true" rows="5" paginatorPosition="bottom">
 
 				<f:facet name="header">Livros</f:facet>
 				<p:column headerText="Título" sortBy="#{livro.titulo}"
@@ -119,12 +119,19 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="Alterar">
-					<h:commandLink value="altera" action="#{livroBean.carregar(livro)}" />
+				<p:column headerText="Alterar" style="text-align:center">
+					<p:commandLink value="altera" action="#{livroBean.carregar(livro)}" update="formAddLivro"/>
 				</p:column>
 
-				<p:column headerText="Remover">
-					<h:commandLink value="remove" action="#{livroBean.remover(livro)}" />
+				<p:column headerText="Remover" style="text-align:center">
+					<p:commandLink value="remove" action="#{livroBean.remover(livro)}">
+						<p:confirm header="confirmacao" message="Tem certeza?" icon="ui-icon-alert" />
+					</p:commandLink>
+					
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				    </p:confirmDialog>
 				</p:column>
 
 			</p:dataTable>

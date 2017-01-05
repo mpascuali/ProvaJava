@@ -8,6 +8,8 @@
 
 	<ui:composition template="_template.xhtml">
 	
+		<p:growl showDetail="true"/>
+	
 		<f:metadata>
 			<f:viewParam name="autorId" value="#{autorBean.autorId}" />
 			<f:viewAction action="#{autorBean.carregarAutorPelaId}" if="#{param.autorId != null}" />
@@ -58,7 +60,7 @@
 					<p:commandButton icon="fa fa-fw fa-remove" action="#{autorBean.remover(autor)}" 
 						update="@form" />
 						
-					#{autor.nome} - #{autor.email}
+					#{autor.nome} - #{autor.email} - Qtd. Livro: 43
 				</p:dataList>
 			</h:form>		
 		</ui:define>

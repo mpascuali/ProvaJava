@@ -1,6 +1,7 @@
 package br.com.prova.livraria.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -35,5 +36,17 @@ public class UsuarioDao {
 	public void drop() {
 		// TODO Auto-generated method stub
 		LSUsuario.clear();
+	}
+	
+	public List<Usuario> listaTodos(){
+		return LSUsuario;
+	}
+	
+	public void remover(Usuario usuario){
+		LSUsuario.remove(usuario);
+	}
+	
+	public void atualiza(Usuario usuario){
+		//TODO atualizar
 	}
 }

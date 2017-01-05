@@ -38,17 +38,20 @@ public class AutorDao {
 	}
 
 	public void remove(Autor autor) {
-		// TODO Auto-generated method stub
-		
+		LSAutor.remove(autor);
 	}
 
 	public void adiciona(Autor autor) {
-		// TODO Auto-generated method stub
-		
+		LSAutor.add(autor);
 	}
 
 	public void atualiza(Autor autor) {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < LSAutor.size(); i++) {
+			if(LSAutor.get(i).getId() == autor.getId()){
+				LSAutor.get(i).setEmail(autor.getEmail());
+				LSAutor.get(i).setNome(autor.getNome());
+				break;
+			}
+		}
 	}
 }
